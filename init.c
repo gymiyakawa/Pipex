@@ -5,62 +5,72 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 11:22:34 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/18 14:10:50 by gmiyakaw         ###   ########.fr       */
+/*   Created: 2023/01/24 13:01:00 by gmiyakaw          #+#    #+#             */
+/*   Updated: 2023/01/25 16:02:22 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-	// initializes all variables in the struct to zero or NULL
-void	clean_init(t_data *p)
+void	init_struct(t_data *p, char **av, char **envp)
 {
 	p->pipe[0] = 0;
 	p->pipe[1] = 0;
-	p->fd_child1 = 0;
-	p->fd_child2 = 0;
+	p->pid_child1 = 0;
+	p->pid_child2 = 0;
+	p->fd_file1 = 0;
+	p->fd_file2 = 0;
+	p->status = 0;
 	p->env_path = NULL;
+	p->envp	= envp;
+	p->args = av;
+	p->cmd_path1 = NULL;
+	p->cmd_path2 = NULL;
 }
 
-	// finds the correct PATH string in the enviroment variable.
-	// returns a pointer to the fifth character of the string (after
-	// the PATH=)
-
-char	*pathfinder(char **envp)
+int	fd_setup(t_data *p)
 {
-	size_t i;
+	p->fd_file1 = open(p->args[1], O_RDONLY);
+	if (p->fd_file1 < 0)
+		errmsg_exit(ERR_FD);
+
+	p->fd_file2 = open(p->args[4], O_RDWR | O_CREAT, 0666);
+	if (p->fd_file2 < 0)
+		errmsg_exit(ERR_FD);
+	return (0);
+}
+
+//  look for string starting with PATH= in the environment array
+// split that line into a string array using : as separator
+
+int	env_pathfinder(t_data	*p)
+{
+	int	i;
+	char *tmp;
 
 	i = 0;
-	while (envp[i])
-	{
-		if (ft_strnstr(envp[i], "PATH=", 5) == NULL)
-			i++;
-		else
-			return (envp[i] + 5);
-	}
-	return (NULL);
+	while (p->envp[i] && ft_strnstr(p->envp[i], "PATH=", 5) == 0)
+		i++;
+	tmp = p->envp[i] + 5;
+	p->env_path = ft_split(tmp, ':');
+	return (0);
+
+	if (p->envp[i] == NULL)
+		errmsg_exit(ERR_PATH);
+	return (-2);
 }
 
-	// breaks the path string into their respective addresses, originally
-	// separated by ":". returns an array of strings containing each address.
-	// finishes by placing a / at the end of each address line.
-
-char	**pathsetter (char **envp)
+void	free_struct(t_data *p)
 {
-	char	**res;
-	char	*path_line;
-	size_t	i;
-
-	i = -1;
-	res = NULL;
-	path_line = NULL;
-	path_line = pathfinder(envp);
-	if (!path_line)
-		return(NULL);
-	res = ft_split(path_line, ':');
-	while (res[++i])
-	{
-		ft_strjoin_free(res[i], "/");
-	}
-	return (res);
+	if (p->env_path)
+		ft_free_array(p->env_path);
+	if (p->cmd_args1)
+		ft_free_array(p->cmd_args1);
+	if (p->cmd_args2)
+		ft_free_array(p->cmd_args2);
+	if (p->cmd_args1)
+		free(p->cmd_path1);
+	if (p->cmd_path2)
+		free(p->cmd_path2);
+	return ;
 }

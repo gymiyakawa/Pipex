@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:46:34 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/18 14:09:42 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:59:20 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list
 /*----------------------- MALLOC FUNCTIONS --------------------------*/
 void	*ft_calloc(size_t count, size_t size);
 void	*x_calloc(size_t size);
+void	ft_free_array(char **array);
 
 /*----------------------- MEMORY FUNCTIONS --------------------------*/
 void	*ft_memchr(const void *s, int c, size_t n);

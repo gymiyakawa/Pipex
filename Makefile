@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/22 15:18:11 by gmiyakaw          #+#    #+#              #
-#    Updated: 2023/01/18 14:12:54 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/01/25 12:13:25 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJ	=	$(SRC:.c=.o)
 
 LIB 	=	libft/libft.a
 
-SRC		=	pipex.c init.c error_management.c
+SRC		=	pipex.c init.c error.c process_mgmt.c parsing.c testing.c
 
 CC	=	gcc
 

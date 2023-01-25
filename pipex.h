@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 15:17:36 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/18 13:22:14 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:00:48 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,49 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
-/*
-struct composition:
-fds for infile and outfile
-address for env path.
-pipe variables?
-*/
 
+/*------------------- ERROR MESSAGES -------------------*/
+#define ERR_ARGC "error: invalid number of arguments\n"
+#define ERR_FD "error: unable to open file\n"
+#define ERR_PATH "error: path not found. Restart terminal\n"
+#define ERR_FORK "error: fork function failed\n"
+#define ERR_CMD "error: invalid command\n"
+#define ERR_EXEC "error: "
+
+/*----------------- STRUCT DEFINITION -----------------*/
 typedef struct s_data
 {
 	int pipe[2];
-	int fd_child1;
-	int fd_child2;
+	pid_t pid_child1;
+	pid_t pid_child2;
+	int	fd_file1;
+	int	fd_file2;
+	int	status;
 	char **env_path;
+	char **envp;
+	char **args;
+	char **cmd_args1;
+	char **cmd_args2;
+	char *cmd_path1;
+	char *cmd_path2;
 } t_data;
 
-/*---------------- INITIALIZATION ------------------*/
-char	*pathfinder(char **envp);
-char 	**pathsetter (char **envp);
-void	clean_init(t_data *p);
+/*---------------- INITIALIZATION / EXIT ------------------*/
+void	init_struct(t_data *p, char **av, char **envp);
+int		fd_setup(t_data *p);
+int		env_pathfinder(t_data	*p);
+void	free_struct(t_data *p);
 
 /*--------------- ERROR MANAGEMENT -----------------*/
-int		check_args(int ac, char **av, char **envp);
+void	errno_exit(const char *msg, int n);
+void	errmsg_exit(const char *msg);
+/*---------------- ARGUMENT PARSING ------------------*/
+int		cmd_parsing(t_data *p);
+char	*cmd_pathfinder(t_data *p, char **cmd_arg);
+
+/*--------------- PROCESS HANDLING -----------------*/
+void	first_child(t_data *p);
+void	second_child(t_data *p);
+
+			/***** TESTING *****/
+void	print_struct(t_data *p);

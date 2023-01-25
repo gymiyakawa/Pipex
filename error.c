@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_management.c                                 :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 15:39:39 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/17 10:58:21 by gmiyakaw         ###   ########.fr       */
+/*   Created: 2023/01/25 10:34:44 by gmiyakaw          #+#    #+#             */
+/*   Updated: 2023/01/25 15:24:28 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-	access, check commands.
-	open, check and determines fd.
+// error management functions
 
-*/
 #include "pipex.h"
 
-int	check_args(int ac, char **av, char **envp)
+// used for commands, where execution would produce an errno
+void	errno_exit(const char *msg, int n)
 {
-	if (ac != 5)
-	{
-		ft_printf("error: invalid argument quantity. Required arguments = 4.");
-		return (1);
-	}
-	if (!av[0] || !av[3])
-	{
-		ft_printf("error: invalid arguments. Filename required.");
-		return (2);
-	}
-	if (!envp)
-	{
-		ft_printf("environment error: restart terminal.");
-		return (3);
-	}
-	else
-		return (0);
+	perror(msg);
+	exit(n);
+}
+
+// used for created functions where errno doesn't exist / is
+// irrelevant.
+void	errmsg_exit(const char *msg)
+{
+	ft_printf("%s\n", msg);
+	exit (1);
 }
