@@ -6,7 +6,7 @@
 #    By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 15:08:27 by gmiyakaw          #+#    #+#              #
-#    Updated: 2022/12/14 11:55:07 by gmiyakaw         ###   ########.fr        #
+#    Updated: 2023/01/19 13:58:23 by gmiyakaw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC 	= 	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c ft_strnstr.c\
 	ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_putchar.c\
 	ft_rputnbr.c ft_rputstr.c ft_rputaddress.c ft_rputnbr_base.c ft_rputchar.c \
-	ft_strcmp.c ft_str_tolower.c x_calloc.c
+	ft_strcmp.c ft_str_tolower.c x_calloc.c ft_strjoin_free.c ft_free_array.c
 
 OBJ		=	$(SRC:.c=.o) $(PRINTF:.c=.o)
 

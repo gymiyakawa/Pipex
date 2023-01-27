@@ -6,36 +6,58 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 15:17:36 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/10 10:27:39 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/01/25 16:00:48 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
 
-/* Here we go, brand new project. 
+/*------------------- ERROR MESSAGES -------------------*/
+#define ERR_ARGC "error: invalid number of arguments\n"
+#define ERR_FD "error: unable to open file\n"
+#define ERR_PATH "error: path not found. Restart terminal\n"
+#define ERR_FORK "error: fork function failed\n"
+#define ERR_CMD "error: invalid command\n"
+#define ERR_EXEC "error: "
 
-First steps:
-Read assignment.
-Freak out because it doesn't make sense
-read about it
-freak out some more.
-keep reading and watching tutorials
-freak out less
-code it all in
-debug
-change your mind, restructure, restart
-debug some more
-win
+/*----------------- STRUCT DEFINITION -----------------*/
+typedef struct s_data
+{
+	int pipe[2];
+	pid_t pid_child1;
+	pid_t pid_child2;
+	int	fd_file1;
+	int	fd_file2;
+	int	status;
+	char **env_path;
+	char **envp;
+	char **args;
+	char **cmd_args1;
+	char **cmd_args2;
+	char *cmd_path1;
+	char *cmd_path2;
+} t_data;
 
-freak out because code is working
-remember impostor syndrome is a thing
-stop freaking out
+/*---------------- INITIALIZATION / EXIT ------------------*/
+void	init_struct(t_data *p, char **av, char **envp);
+int		fd_setup(t_data *p);
+int		env_pathfinder(t_data	*p);
+void	free_struct(t_data *p);
 
-push project and subcribe for defense
+/*--------------- ERROR MANAGEMENT -----------------*/
+void	errno_exit(const char *msg, int n);
+void	errmsg_exit(const char *msg);
+/*---------------- ARGUMENT PARSING ------------------*/
+int		cmd_parsing(t_data *p);
+char	*cmd_pathfinder(t_data *p, char **cmd_arg);
 
-update github
+/*--------------- PROCESS HANDLING -----------------*/
+void	first_child(t_data *p);
+void	second_child(t_data *p);
 
-start a new project.
-*/
+			/***** TESTING *****/
+void	print_struct(t_data *p);

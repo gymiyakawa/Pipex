@@ -6,7 +6,7 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 15:46:34 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2022/12/21 14:57:01 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/01/19 13:59:20 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list
 /*----------------------- MALLOC FUNCTIONS --------------------------*/
 void	*ft_calloc(size_t count, size_t size);
 void	*x_calloc(size_t size);
+void	ft_free_array(char **array);
 
 /*----------------------- MEMORY FUNCTIONS --------------------------*/
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -63,6 +64,7 @@ char	**ft_split(const char *s, char c);
 char	*ft_strchr(char *s, int c);
 char	*ft_strdup(char *s1);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_free(char const *s1, char const *s2);
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 size_t	ft_strlcat(char	*dst, const char	*src, size_t destsize);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);

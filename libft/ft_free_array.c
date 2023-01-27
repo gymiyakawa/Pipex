@@ -1,14 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tests.c                                            :+:      :+:    :+:   */
+/*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 15:17:16 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/10 10:28:20 by gmiyakaw         ###   ########.fr       */
+/*   Created: 2023/01/19 13:52:20 by gmiyakaw          #+#    #+#             */
+/*   Updated: 2023/01/19 13:57:29 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+	// frees every string in the array, and the pointer
+	// itself at the end
+#include "libft.h"
 
+void	ft_free_array(char **array)
+{
+	size_t	i;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+	return;
+}
