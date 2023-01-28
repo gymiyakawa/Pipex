@@ -6,11 +6,9 @@
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 10:34:44 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/25 15:24:28 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:15:41 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// error management functions
 
 #include "pipex.h"
 

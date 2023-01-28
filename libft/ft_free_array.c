@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_arr.c                                      :+:      :+:    :+:   */
+/*   ft_free_array.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmiyakaw <gmiyakaw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 13:52:20 by gmiyakaw          #+#    #+#             */
-/*   Updated: 2023/01/19 13:57:29 by gmiyakaw         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:02:05 by gmiyakaw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 void	ft_free_array(char **array)
 {
 	size_t	i;
+
 	i = 0;
 	while (array[i])
 	{
@@ -24,5 +25,5 @@ void	ft_free_array(char **array)
 		i++;
 	}
 	free(array);
-	return;
+	return ;
 }

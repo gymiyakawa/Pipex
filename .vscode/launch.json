@@ -4,10 +4,11 @@
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "lldb",
+	  "stopOnEntry": true,
       "request": "launch",
-      "args": [],
+      "args": ["infile", "ls -l", "wc -l", "outfile"],
       "cwd": "/Users/gmiyakaw/Documents/Common Core Projects/Pipex",
-      "program": "/Users/gmiyakaw/Documents/Common Core Projects/Pipex/build/Debug/outDebug"
-    }
+      "program": "${workspaceRoot}/pipex"
+	}
   ]
 }
